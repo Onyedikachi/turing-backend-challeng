@@ -11,29 +11,14 @@ const {
 
 const router = express.Router();
 
-router.post(
-  "/create",
-  checkTokenExists,
-  verifyToken,
-  checkAdmin,
-  expressValidator(validateInput.create),
-  catchErrors(ctrlAdmin.create)
+router.get("/", catchErrors(ctrlAdmin.getCategories));
+router.get("/:category_id", catchErrors(ctrlAdmin.getCategoryById));
+router.get(
+  "/inProduct/:product_id",
+  catchErrors(ctrlAdmin.getCategoriesOfProduct)
 );
-router.get("/all", catchErrors(ctrlAdmin.getAll));
-router.put(
-  "/edit/:catId",
-  checkTokenExists,
-  verifyToken,
-  checkAdmin,
-  expressValidator(validateInput.update),
-  catchErrors(ctrlAdmin.update)
+router.get(
+  "/inDepartment/:department_id",
+  catchErrors(ctrlAdmin.getCategoriesOfDepartment)
 );
-router.delete(
-  "/delete/:catId",
-  checkTokenExists,
-  verifyToken,
-  checkAdmin,
-  catchErrors(ctrlAdmin.delete)
-);
-router.get("/:id", catchErrors(ctrlAdmin.getSingleCategory));
 module.exports = router;
