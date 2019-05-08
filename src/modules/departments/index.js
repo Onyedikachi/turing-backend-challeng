@@ -9,7 +9,13 @@ const { sendJSONResponse } = require("../../helpers/");
 module.exports.getDepartments = async (req, res) => {
   await dbConn.query("SELECT * from department", (error, results, fields) => {
     if (error) throw error;
-    return sendJSONResponse(res, 200, { results }, "Departments Fetched");
+    return sendJSONResponse(
+      res,
+      200,
+      { results },
+      req.method,
+      "Departments Fetched"
+    );
   });
 };
 
@@ -31,6 +37,7 @@ module.exports.getDepartmentById = async (req, res) => {
           res,
           404,
           null,
+          req.method,
           "Department with id " + department_id + " not found"
         );
       } else {
@@ -38,6 +45,7 @@ module.exports.getDepartmentById = async (req, res) => {
           res,
           200,
           { results },
+          req.method,
           "Single Department Fetched"
         );
       }
