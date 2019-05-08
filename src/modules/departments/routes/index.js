@@ -13,5 +13,5 @@ const router = express.Router();
 
 router.get("/", catchErrors(ctrlAdmin.getDepartments));
 
-router.get("/:id", catchErrors(ctrlAdmin.getSingleCategory));
+router.get("/:department_id", catchErrors(ctrlAdmin.getDepartmentById));
 module.exports = router;
