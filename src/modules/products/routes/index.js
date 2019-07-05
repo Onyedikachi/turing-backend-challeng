@@ -12,28 +12,30 @@ const {
 const router = express.Router();
 
 router.post(
-  "/create",
-  checkTokenExists,
-  verifyToken,
-  checkAdmin,
-  expressValidator(validateInput.create),
-  catchErrors(ctrlAdmin.create)
+  "/:product_id/reviews",
+  // checkTokenExists,
+  // verifyToken,
+  // checkAdmin,
+  // expressValidator(validateInput.create),
+  catchErrors(ctrlAdmin.createReviews)
 );
-router.get("/all", catchErrors(ctrlAdmin.getAll));
-router.put(
-  "/edit/:catId",
-  checkTokenExists,
-  verifyToken,
-  checkAdmin,
-  expressValidator(validateInput.update),
-  catchErrors(ctrlAdmin.update)
+
+router.get("/", catchErrors(ctrlAdmin.getProducts));
+router.get("/search", catchErrors(ctrlAdmin.searchProducts));
+router.get("/:product_id", catchErrors(ctrlAdmin.getProductById));
+router.get(
+  "/inCategory/:category_id",
+  catchErrors(ctrlAdmin.getProductsOfCategory)
 );
-router.delete(
-  "/delete/:catId",
-  checkTokenExists,
-  verifyToken,
-  checkAdmin,
-  catchErrors(ctrlAdmin.delete)
+router.get(
+  "/inDepartment/:department_id",
+  catchErrors(ctrlAdmin.getProductsOfDepartment)
 );
-router.get("/:id", catchErrors(ctrlAdmin.getSingleCategory));
+router.get("/:product_id/details", catchErrors(ctrlAdmin.getProductDetails));
+router.get(
+  "/:product_id/locations",
+  catchErrors(ctrlAdmin.getProductLocations)
+);
+router.get("/:product_id/reviews", catchErrors(ctrlAdmin.getProductReviews));
+
 module.exports = router;
