@@ -10,7 +10,7 @@ const config = require("./config");
 const { sendJSONResponse } = require("./helpers");
 const logger = require("./config/logger");
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "52428800" }));
 
 const publicPath = path.join(__dirname, "./public");
